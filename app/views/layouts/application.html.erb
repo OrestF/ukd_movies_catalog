@@ -11,6 +11,13 @@
   </head>
 
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <% if user_signed_in? %>
+      <%= link_to 'Log Out', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+    <% else %>
+      <%= link_to 'Sign In', new_user_session_path %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
