@@ -274,7 +274,7 @@ DEPENDENCIES
   bootsnap
   capybara
   debug
-`  devise (~> 4.9)
+  devise
   importmap-rails
   jbuilder
   letter_opener
