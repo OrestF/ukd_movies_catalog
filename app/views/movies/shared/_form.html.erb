@@ -5,8 +5,28 @@
   </div>
 
   <div style='margin-bottom: 10px;'>
-    <%= form.label :title, style: 'display: block;', class: 'test' %>
-    <%= form.text_field :title %>
+    <%= form.label :description, 'Description (minutes)', style: 'display: block;', class: 'test' %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div style='margin-bottom: 10px;'>
+    <%= form.label :duration, style: 'display: block;', class: 'test' %>
+    <%= form.number_field :duration %>
+  </div>
+
+  <div style='margin-bottom: 10px;'>
+    <%= form.label :director, style: 'display: block;', class: 'test' %>
+    <%= form.text_field :director %>
+  </div>
+
+  <div style='margin-bottom: 10px;'>
+    <%= form.label :year_of_creation, style: 'display: block;', class: 'test' %>
+    <%= form.number_field :year_of_creation %>
+  </div>
+
+  <div style='margin-bottom: 10px;'>
+    <%= form.label :genres, style: 'display: block;', class: 'test' %>
+    <%= form.select :genres, Movie::GENRES, multiple: true %>
   </div>
 
   <%= form.submit %>

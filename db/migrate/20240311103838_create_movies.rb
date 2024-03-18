@@ -3,10 +3,10 @@ class CreateMovies < ActiveRecord::Migration[7.1]
     create_table :movies do |t|
       t.string :title, null: false, default: '', index: true
       t.text :description, default: ''
-      t.string :duration
+      t.integer :duration
       t.string :director
-      t.integer :year_of_creation, default: 1900
-      t.integer :genre, default: 0
+      t.integer :year_of_creation
+      t.text :genres, array: true, default: []
 
       t.timestamps
     end

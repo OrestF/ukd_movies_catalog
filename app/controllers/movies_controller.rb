@@ -16,17 +16,38 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
+    @movie = Movie.new(movie_params)
+    if @movie.save
+      redirect_to @movie
+    else
+      render :new
+    end
   end
 
   # GET /movies/:id/edit
   def edit
+    @movie = Movie.find(params[:id])
   end
 
   # PUT/PATCH /movies/:id
   def update
+    @movie = Movie.find(params[:id])
+    @movie.assign_attributes(movie_params)
+    if @movie.save
+      redirect_to @movie
+    else
+      flash[:error] = @movie.errors.full_messages.join(", ")
+      render :edit
+    end
   end
 
   # DELETE /movies/:id
   def destroy
+  end
+
+  private
+
+  def movie_params
+    params.require(:movie).permit(:title, :description, :duration, :director, :year_of_creation, genres: [])
   end
 end
