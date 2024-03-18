@@ -1,1 +1,9 @@
 <h1>All Movies</h1>
+
+<% @movies.each do |movie| %>
+  <h2>Title: <%= link_to(movie.title, movie_path(movie)) %></h2>
+  <h3>Description <%= movie.description %></h3>
+  <p>Year of Creation: <%= movie.year_of_creation %></p>
+  <p>Genre: <%= movie.genre %></p>
+  <p>Director: <%= movie.director %></p>
+<% end %>

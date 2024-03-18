@@ -9,6 +9,11 @@ class MoviesController < ApplicationController
     @movie = Movie.find(params[:id])
   end
 
+  # GET /movies/new
+  def new
+    @movie = Movie.new
+  end
+
   # POST /movies
   def create
   end
