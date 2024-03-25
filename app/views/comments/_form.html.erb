@@ -1,0 +1,6 @@
+<h3>Create Comment</h3>
+<%= form_for :comment, url: movie_comments_path(movie) do |form| %>
+  <%= form.text_field :body %>
+
+  <%= form.submit %>
+<% end %>

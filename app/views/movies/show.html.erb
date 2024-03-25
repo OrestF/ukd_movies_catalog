@@ -4,3 +4,9 @@
 <p>Year of Creation: <%= @movie.year_of_creation %></p>
 <p>Genre: <%= @movie.genres.filter_map { |g| g.titleize if g.present? }.join(', ') %></p>
 <p>Director: <%= @movie.director %></p>
+
+<%= @movie.comments.each do |comment| %>
+  <p><%= comment.body %></p>
+<% end %>
+
+<%= render partial: 'comments/form', locals: { movie: @movie } %>

@@ -11,5 +11,7 @@ Rails.application.routes.draw do
   get 'static_pages/home', to: 'static_pages#home'
   get 'static_pages/secret', to: 'static_pages#secret'
 
-  resources :movies
+  resources :movies do
+    resources :comments
+  end
 end

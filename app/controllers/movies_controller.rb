@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_action :authenticate_user!
+
   # GET /movies
   def index
     @movies = Movie.all
@@ -20,6 +22,7 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to @movie
     else
+      flash[:error] = @movie.errors.full_messages.join(", ")
       render :new
     end
   end
