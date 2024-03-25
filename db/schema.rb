@@ -16,8 +16,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_22_104601) do
 
   create_table "comments", force: :cascade do |t|
     t.text "body", default: ""
-    t.string "commentable_type" # Movie
-    t.bigint "commentable_id" # 23
+    t.string "commentable_type"
+    t.bigint "commentable_id"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

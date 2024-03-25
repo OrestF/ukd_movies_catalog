@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get 'static_pages/secret', to: 'static_pages#secret'
 
   resources :movies do
-    resources :comments
+    resources :comments, only: :create
   end
 end
