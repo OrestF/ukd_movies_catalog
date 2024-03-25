@@ -4,11 +4,12 @@
 <p>Year of Creation: <%= @movie.year_of_creation %></p>
 <p>Genre: <%= @movie.genres.filter_map { |g| g.titleize if g.present? }.join(', ') %></p>
 <p>Director: <%= @movie.director %></p>
+<%= link_to('EDit', edit_movie_path(@movie)) %>
 
 <hr/>
 
 <% @movie.comments.includes(:user).each do |comment| %>
-  <p><%= comment.body %> (by <%= comment.user.email %>)</p>
+  <p><%= comment.body %> (by <%= comment.user.email %>) <%= link_to('edit', edit_movie_comment_path(comment, movie_id: comment.commentable.id)) %></p>
 <% end %>
 
 <%= render partial: 'comments/form', locals: { movie: @movie } %>
