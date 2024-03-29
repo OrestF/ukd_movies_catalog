@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_movie
-  before_action :find_comment, except: :create
+  before_action :find_and_authorize_comments, except: :create
   
   def create
     # @comment = @movie.comments.build(user: current_user, **comment_params)
@@ -12,7 +12,6 @@ class CommentsController < ApplicationController
   end
 
   def edit
-    authorize @comment
   end
 
   def update
@@ -26,7 +25,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    authorize @comment
     @comment.destroy!
   end
 
@@ -40,7 +38,8 @@ class CommentsController < ApplicationController
     @movie = Movie.find(params[:movie_id])
   end
 
-  def find_comment
+  def find_and_authorize_comment
     @comment = Comment.find(params[:id])
+    authorize @comment
   end
 end

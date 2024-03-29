@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
-  before_action :authenticate_user!, only: :secret
+  skip_before_action :authenticate_user!, only: [:home]
   
   def home
     @welcome_message = "Welcome to the Ruby on Rails Movies Catalog app"

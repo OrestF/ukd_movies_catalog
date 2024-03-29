@@ -1,19 +1,19 @@
 class CommentPolicy < ApplicationPolicy
-  def new?
+  def create?
     true
   end
 
-  def edit?
+  def update?
+    record_owner?
+  end
+  
+  def destroy?
+    record_owner?
+  end
+
+  private
+
+  def record_owner?
     @user.comments.exists?(id: @record)
   end
-  alias destroy? edit?
-  alias update? edit?
-
-  # def update?
-  #   edit?
-  # end
-
-  # def destroy?
-  #   edit?
-  # end
 end
