@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get 'static_pages/secret', to: 'static_pages#secret'
 
   resources :movies do
-    resources :comments, only: %i[create edit update]
+    resources :comments, only: %i[create edit update destroy]
   end
 end

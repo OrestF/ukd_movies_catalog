@@ -1,31 +1,33 @@
 class CommentsController < ApplicationController
-  before_action :find_movie, only: :create
+  before_action :find_movie
+  before_action :find_comment, except: :create
   
   def create
     # @comment = @movie.comments.build(user: current_user, **comment_params)
     @comment = Comment.new(comment_params.merge!(user: current_user, commentable: @movie))
 
-    flash[:error] = @comment.errors.full_messages.join(", ") unless @comment.save
+    flash[:alert] = @comment.errors.full_messages.join(", ") unless @comment.save
 
     redirect_to @movie
   end
 
   def edit
-    @comment = Comment.find(params[:id])
-
     authorize @comment
   end
 
   def update
-    @comment = Comment.find(params[:id])
-
     @comment.assign_attributes(comment_params)
     if @comment.save
       redirect_to @comment.commentable
     else
-      flash[:error] = @comment.errors.full_messages.join(", ")
+      flash[:alert] = @comment.errors.full_messages.join(", ")
       render :edit
     end
+  end
+
+  def destroy
+    authorize @comment
+    @comment.destroy!
   end
 
   private
@@ -36,5 +38,9 @@ class CommentsController < ApplicationController
 
   def find_movie
     @movie = Movie.find(params[:movie_id])
+  end
+
+  def find_comment
+    @comment = Comment.find(params[:id])
   end
 end
