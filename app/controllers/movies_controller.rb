@@ -7,6 +7,8 @@ class MoviesController < ApplicationController
   # GET /movies/:id
   def show
     @movie = Movie.find(params[:id])
+    @omdb = OmdbClient.new
+    @omdb_movie = @omdb.find_by_title(@movie.title)
   end
 
   # GET /movies/new

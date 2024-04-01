@@ -8,6 +8,15 @@
 
 <hr/>
 
+<article>
+  <h3> OMDB info </h3>
+  <p>
+    <%= @omdb_movie %>
+  </p>
+</article>
+
+<hr/>
+
 <% @movie.comments.includes(:user).each do |comment| %>
   <%= turbo_frame_tag(dom_id(comment)) do %>
     <p>
