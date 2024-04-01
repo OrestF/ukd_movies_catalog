@@ -22,5 +22,4 @@ class OmdbClient
   def parse_body(response)
     JSON.parse(response.body)
   end
-
 end
