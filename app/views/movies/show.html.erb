@@ -1,4 +1,7 @@
 <h1>Show view</h1>
+<% if @movie.cover_image_url %>
+  <h2><%= image_tag(@movie.cover_image_url) %></h2>
+<% end %>
 <h2>Title: <%= @movie.title %></h2>
 <h3>Description <%= @movie.description %></h3>
 <p>Year of Creation: <%= @movie.year_of_creation %></p>
@@ -7,13 +10,6 @@
 <%= link_to('EDit', edit_movie_path(@movie)) %>
 
 <hr/>
-
-<article>
-  <h3> OMDB info </h3>
-  <p>
-    <%= @omdb_movie %>
-  </p>
-</article>
 
 <hr/>
 
@@ -26,12 +22,12 @@
       <% end %>
 
       <% if policy(comment).destroy? %>
-        <%= link_to('destroy', 
-                    movie_comment_path(comment, movie_id: comment.commentable), 
-                    method: :delete, 
+        <%= link_to('destroy',
+                    movie_comment_path(comment, movie_id: comment.commentable),
+                    method: :delete,
                     data: { turbo_method: :delete }) %>
-      <% end%>
-    </p> 
+      <% end %>
+    </p>
   <% end %>
 <% end %>
 

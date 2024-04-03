@@ -1,6 +1,9 @@
 <h1>All Movies</h1>
 
 <% @movies.each do |movie| %>
+  <% if movie.cover_image_url %>
+    <h2><%= image_tag(movie.cover_image_url) %></h2>
+  <% end %>
   <h2>Title: <%= link_to(movie.title, movie_path(movie)) %></h2>
   <h3>Description <%= movie.description %></h3>
   <p>Year of Creation: <%= movie.year_of_creation %></p>

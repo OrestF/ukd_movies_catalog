@@ -54,9 +54,42 @@ class MoviesController < ApplicationController
     end
   end
 
+
+  def omdb_search
+    if params[:search_query].present?
+      @omdb = OmdbClient.new
+
+      # @search_results = @omdb.search(params[:search_query])['Search']
+      res = @omdb.search(params[:search_query])
+      @search_results = res['Search']
+    end
+  end
+
+  def omdb_import
+    @omdb = OmdbClient.new
+
+    @omdb_movie = @omdb.find_by_id(params[:omdb_id])
+
+    @movie = Movie.new(
+      title: @omdb_movie['Title'],
+      cover_image_url: @omdb_movie['Poster'],
+      year_of_creation: @omdb_movie['Year'],
+      description: @omdb_movie['Plot'],
+      duration: @omdb_movie['Runtime'],
+      director: @omdb_movie['Director'],
+      genres: @omdb_movie['Genre'].split(', ')
+    )
+    if @movie.save
+      redirect_to @movie
+    else
+      flash[:error] = @movie.errors.full_messages.join(", ")
+      render :omdb_search
+    end
+  end
+
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :duration, :director, :year_of_creation, genres: [])
+    params.require(:movie).permit(:title, :description, :duration, :director, :year_of_creation, :cover_image_url, genres: [])
   end
 end

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get 'static_pages/secret', to: 'static_pages#secret'
 
   resources :movies do
+    collection do
+      get :omdb_search
+      post :omdb_import
+    end
+
     resources :comments, only: %i[create edit update destroy]
   end
 end
