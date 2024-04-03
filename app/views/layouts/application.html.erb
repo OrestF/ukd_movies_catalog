@@ -12,8 +12,14 @@
 
   <body>
     <div class="container">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+      <% if notice.present? %>
+        <p class="notice"><%= notice %></p>
+      <% end %>
+
+      <% if alert.present?%>
+        <p class="alert"><%= alert %></p>
+      <% end %>
+      
       <%= render 'shared/header' %>
       <%= yield %>
     </div>

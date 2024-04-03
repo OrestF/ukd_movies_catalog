@@ -20,10 +20,11 @@ class MoviesController < ApplicationController
   def create
     @movie = Movie.new(movie_params)
     if @movie.save
+      flash[:notice] = 'Movie created'
       redirect_to @movie
     else
-      flash[:error] = @movie.errors.full_messages.join(", ")
-      render :new
+      flash[:alert] = @movie.errors.full_messages.join(", ")
+      redirect_to new_movie_path
     end
   end
 
@@ -39,8 +40,8 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to @movie
     else
-      flash[:error] = @movie.errors.full_messages.join(", ")
-      render :edit
+      flash.now[:alert] = @movie.errors.full_messages.join(", ")
+      redirect_to @movie 
     end
   end
 
@@ -82,8 +83,8 @@ class MoviesController < ApplicationController
     if @movie.save
       redirect_to @movie
     else
-      flash[:error] = @movie.errors.full_messages.join(", ")
-      render :omdb_search
+      flash[:alert] = @movie.errors.full_messages.join(", ")
+      redirect_to omdb_search_movies_path
     end
   end
 

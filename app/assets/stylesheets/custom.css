@@ -1,0 +1,11 @@
+.alert {
+  padding: 10px;
+  border: 1px solid red;
+  background-color: lightpink
+}
+
+.notice {
+  padding: 10px;
+  border: 1px solid blue;
+  background-color: lightblue
+}

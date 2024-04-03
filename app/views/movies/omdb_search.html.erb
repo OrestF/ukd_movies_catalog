@@ -11,10 +11,10 @@
 <% if @search_results.present? %>
   <table>
     <thead>
-    <th>Title</th>
-    <th>Year</th>
-    <th>Image</th>
-    <th>Actions</th>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Image</th>
+      <th>Actions</th>
     </thead>
     <tbody>
     <% @search_results.each do |movie| %>
@@ -23,7 +23,8 @@
         <td><%= movie['Year'] %></td>
         <td><%= image_tag(movie['Poster']) %></td>
         <td>
-          <%= form_tag omdb_import_movies_path(omdb_id: movie['imdbID']), method: :post do %>
+          <%= form_tag omdb_import_movies_path(omdb_id: movie['imdbID']), 
+                        method: :post do %>
             <%= submit_tag 'Import' %>
           <% end %>
         </td>
