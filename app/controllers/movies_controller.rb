@@ -1,4 +1,6 @@
 class MoviesController < ApplicationController
+  before_actoin :find_movie, only: %i[show edit update destroy]
+
   # GET /movies
   def index
     @movies = Movie.all
@@ -6,7 +8,6 @@ class MoviesController < ApplicationController
 
   # GET /movies/:id
   def show
-    @movie = Movie.find(params[:id])
     @omdb = OmdbClient.new
     @omdb_movie = @omdb.find_by_title(@movie.title)
   end
@@ -30,12 +31,10 @@ class MoviesController < ApplicationController
 
   # GET /movies/:id/edit
   def edit
-    @movie = Movie.find(params[:id])
   end
 
   # PUT/PATCH /movies/:id
   def update
-    @movie = Movie.find(params[:id])
     @movie.assign_attributes(movie_params)
     if @movie.save
       redirect_to @movie
@@ -92,5 +91,9 @@ class MoviesController < ApplicationController
 
   def movie_params
     params.require(:movie).permit(:title, :description, :duration, :director, :year_of_creation, :cover_image_url, genres: [])
+  end
+
+  def find_movie
+    @movie = Movie.find(params[:id])
   end
 end
