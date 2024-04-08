@@ -1,10 +1,10 @@
 class CommentsController < ApplicationController
   before_action :find_movie
-  before_action :find_and_authorize_comments, except: :create
+  before_action :find_and_authorize_comment, except: :create
   
   def create
     # @comment = @movie.comments.build(user: current_user, **comment_params)
-    @comment = Comment.new(comment_params.merge!(user: current_user, commentable: @movie))
+    @comment = Comment.new(comment_params.merge!(user: current_user))
 
     flash[:alert] = @comment.errors.full_messages.join(", ") unless @comment.save
 
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :commentable_id, :commentable_type)
   end
 
   def find_movie

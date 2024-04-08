@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_actoin :find_movie, only: %i[show edit update destroy]
+  before_action :find_movie, only: %i[show edit update destroy]
 
   # GET /movies
   def index

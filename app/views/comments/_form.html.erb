@@ -1,6 +1,15 @@
-<h3>Create Comment</h3>
+<% if comment_to.is_a?(Movie) %>
+  <% movie = comment_to %>
+  <h4>Create</h4>
+<% elsif comment_to.is_a?(Comment) %>
+  <% movie = comment_to.commentable %>
+  <h5>Reply</h5>
+<% end %>
+
 <%= form_for :comment, url: movie_comments_path(movie) do |form| %>
-  <%= render 'comments/form_field', form: form %>
+  <%= form.hidden_field :commentable_type, value: comment_to.class.name %>
+  <%= form.hidden_field :commentable_id, value: comment_to.id %>
+  <%= form.text_field :body %>
 
   <%= form.submit %>
 <% end %>
