@@ -1,0 +1,21 @@
+<h1><%= current_user.full_name %></h1>
+<% if current_user.avatar.attached? %>
+  <%= image_tag(current_user.avatar) %>
+<% end %>
+
+<article>
+  <%= form_for(current_user, url: profile_path(current_user), method: :put) do |f| %>
+    <div>
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
+    <div>
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+    <div>
+      <%= f.file_field :avatar %>
+    </div>
+    <%= f.submit %>
+  <% end %>
+</article>
