@@ -17,9 +17,6 @@
   <%= turbo_frame_tag(dom_id(comment)) do %>
     <p>
       <%= comment.body %> (by <%= comment.user.email %>)
-      <div class='container small'>
-        <%= render partial: 'comments/form', locals: { comment_to: comment } %>
-      </div>
       <% if policy(comment).edit? %>
         <%= link_to('edit', edit_movie_comment_path(comment, movie_id: comment.commentable.id)) %>
       <% end %>
@@ -27,9 +24,15 @@
       <% if policy(comment).destroy? %>
         <%= link_to('destroy',
                     movie_comment_path(comment, movie_id: comment.commentable),
-                    method: :delete,
                     data: { turbo_method: :delete }) %>
       <% end %>
+      <div class='container-50'>
+        <% comment.comments.includes(:user).each do |sub_comment| %>
+          <%= sub_comment.body %> (by <%= sub_comment.user.email %>)
+          <br/>
+        <% end %>
+        <%= render partial: 'comments/form', locals: { comment_to: comment } %>
+      </div>
     </p>
   <% end %>
 <% end %>
