@@ -1,7 +1,7 @@
 <h1><%= @subject %></h1>
 
-<p> New comment had been created for <%= @comment.commentable.title %> </p>
+<p> New comment had been created for <%= @movie.title %> </p>
 
 <p>
-  <%= link_to('Open movie', movie_url(@comment.commentable), target: '_blank') %>
+  <%= link_to('Open movie', movie_url(@movie), target: '_blank') %>
 </p>
