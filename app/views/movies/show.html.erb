@@ -28,7 +28,7 @@
       <% end %>
       <div class='container-50'>
         <% comment.comments.includes(:user).each do |sub_comment| %>
-          <%= sub_comment.body %> (by <%= sub_comment.user.email %>)
+          <%= sub_comment.body %> (replay by <%= sub_comment.user.email %>)
           <br/>
         <% end %>
         <%= render partial: 'comments/form', locals: { comment_to: comment } %>
