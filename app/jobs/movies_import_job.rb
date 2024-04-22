@@ -18,6 +18,6 @@ class MoviesImportJob < ApplicationJob
 
     MovieMailer.with(user: current_user, movie: @movie)
                .import_complete
-               .deliver_now if @movie.save!
+               .deliver_later if @movie.save!
   end
 end
